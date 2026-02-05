@@ -5,7 +5,7 @@ def phrase_to_acronym(phrase):
 
 if __name__ == "__main__":
     input_phrase = input("enter a phrase: ")
-    if(phrase_to_acronym(input_phrase) == "NIGGER"):
-        print("men that racist")
+    if(phrase_to_acronym(input_phrase) == "ICE"):
+        print("men that is freedommmmm")
     else:
         print(phrase_to_acronym(input_phrase))

@@ -1,6 +1,26 @@
-#i have make it into a gambling game instead of just a number guessing game, hope you still mark it😭
 
 import random
+
+def simple_guessing_game():
+    number = random.randint(1, 10)
+    guesses = 0
+    while True:
+        try:
+            guess = int(input("guess a number between 1 and 10: "))
+            if guess < 1 or guess > 10:
+                print("please enter a number in that range.")
+                continue
+        except ValueError:
+            print("real number pls.")
+            continue
+        guesses += 1
+        if guess < number:
+            print("too low")
+        elif guess > number:
+            print("too high")
+        else:
+            print(f"noice, you guessed it in {guesses} guesses.")
+            break
 
 def gambling_game():
     while True:
@@ -48,5 +68,20 @@ def gambling_game():
         print(f"guesses cost: {guesses - 1} coins. coins: {coins}")
     print("\nhaha thank you for feeding the house, see you again next time.")
 
+def main():
+    while True:
+        try:
+            choice = int(input("choose 1 for the task or 2 for gambling game: "))
+            if choice == 1:
+                simple_guessing_game()
+            elif choice == 2:
+                gambling_game()
+            else:
+                print("only 1 or 2.")
+                continue
+            break
+        except ValueError:
+            print("bruh, that's not a valid choice.")
+
 if __name__ == "__main__":
-    gambling_game()
+    main()

@@ -26,6 +26,30 @@ class Car:
             f"current_speed={self.current_speed} km/h, "
             f"travelled_distance={self.travelled_distance} km)"
         )
+#also from the new assignment 8
+class Race:
+    def __init__(self, name, distance, cars):
+        self.name = name
+        self.distance = distance
+        self.cars = cars
+    def hour_passes(self):
+        for car in self.cars:
+            delta = random.randint(-10, 15)
+            car.accelerate(delta)
+            car.drive(1)
+    def print_status(self):
+        print(f"\n{self.name} - Race Status")
+        print(f"{'Reg':<7} {'Max':>5} {'Speed':>7} {'Distance':>10}")
+        print("-" * 35)
+        for car in self.cars:
+            print(
+                f"{car.registration_number:<7} "
+                f"{car.max_speed:>5.0f} "
+                f"{car.current_speed:>7.0f} "
+                f"{car.travelled_distance:>10.1f}"
+            )
+    def race_finished(self):
+        return any(car.travelled_distance >= self.distance for car in self.cars)
 
 def example_usage():
     reg = input("car registration number: ").strip()
@@ -65,10 +89,28 @@ def race():
             f"{car.current_speed:>7.0f} "
             f"{car.travelled_distance:>10.1f}"
         )
+#from assignment 8 nhưng mà tách ra new và old cho tét dc cả cái cũ thầy ạ :))))).
+def new_race():
+    cars = [
+        Car(f"ABC-{i+1}", random.randint(150, 200))
+        for i in range(10)
+    ]
+    race = Race("Grand Demolition Derby", 8000, cars)
+    hour = 0
+    while not race.race_finished():
+        race.hour_passes()
+        hour += 1
+        if hour % 10 == 0:
+            race.print_status()
+    race.print_status()
 
 if __name__ == "__main__":
-    mode = input("run the example or race ").strip().lower() #i seperated both of them
-    if mode.startswith("r"):
-        race()
-    else:
+    mode = input("run the example, old race, or new race (e/x/r/n): ").strip().lower()
+    if mode == "e":
         example_usage()
+    elif mode == "r":
+        race()
+    elif mode == "n":
+        new_race()
+    else:
+        print("Invalid mode")
